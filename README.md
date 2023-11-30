@@ -1,9 +1,9 @@
 ## Final Project Database System
 Anggota Kelompok :
-- 1. `MUHAMAD IBNU FADHIL`
-- 2. `VALENTINUS ARYO SAPUTRO`
-- 3. `DIEFA EDRA RIVANDI`
-- 4. `SATRIA ADI PRATAMA`
+- `MUHAMAD IBNU FADHIL`
+- `VALENTINUS ARYO SAPUTRO`
+- `DIEFA EDRA RIVANDI`
+- `SATRIA ADI PRATAMA`
 
 ## Installation Instruction
 
