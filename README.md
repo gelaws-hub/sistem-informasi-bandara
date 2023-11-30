@@ -1,9 +1,20 @@
 ## Final Project Database System
 Anggota Kelompok :
-`MUHAMAD IBNU FADHIL`
-`VALENTINUS ARYO SAPUTRO`
-`DIEFA EDRA RIVANDI`
-`SATRIA ADI PRATAMA`
+-1. `MUHAMAD IBNU FADHIL`
+-2. `VALENTINUS ARYO SAPUTRO`
+-3. `DIEFA EDRA RIVANDI`
+-4. `SATRIA ADI PRATAMA`
+
+## Installation Instruction
+
+- Clone the repository with `git clone`
+- Copy .env.example file to .env and edit database credentials there
+- Run `composer install`
+- Run `php artisan key:generate`
+- Run `php artisan migrate --seed` (It has some seeded data for your testing)
+- Run `npm install && npm run dev`
+- Go to phpMyAdmin and import SQL from `/database/airportinfo.sql`
+- to run the program `php artisan serve` and make sure `npm run dev` is also active or just go with the build `npm run build`
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
@@ -57,16 +68,6 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
 - **[Lendio](https://lendio.com)**
 
-## Installation Instruction
-
-- Clone the repository with `git clone`
-- Copy .env.example file to .env and edit database credentials there
-- Run `composer install`
-- Run `php artisan key:generate`
-- Run `php artisan migrate --seed` (It has some seeded data for your testing)
-- Run `npm install && npm run dev`
-- Go to phpMyAdmin and import SQL from `/database/airportinfo.sql`
-- That's it: launch the main URL and login with default credentials `admin@admin.com` - `password`
 
 ## Contributing
 
