@@ -11,7 +11,7 @@
 <div class="pb-3">
     <form class="d-flex" action="{{ url('hangar-all') }}" method="get">
         <input class="form-control me-1" type="search" name="katakunci" value="{{ Request::get('katakunci') }}"
-            placeholder="Masukkan Nama Bandara atau Terminal....." aria-label="Search">
+            placeholder="Masukkan Nama Hangar, Bandara atau Terminal....." aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 </div>

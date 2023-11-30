@@ -17,6 +17,7 @@ class HangarController extends Controller
             $datas = DB::table('hangar')
                 ->where('bandara', 'like', "%$katakunci%")
                 ->orWhere('terminal', 'like', "%$katakunci%")
+                ->orWhere('nama_hangar', 'like', "%$katakunci%")
                 ->paginate(5);
         } else {
             $datas = DB::select('select * from hangar where is_deleted = 0');
