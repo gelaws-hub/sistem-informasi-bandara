@@ -27,6 +27,24 @@ class PesawatController extends Controller
             ->with('datas', $datas);
     }
 
+    public function restorepage(Request $request) {
+        $datas = DB::select('select * from pesawat where is_deleted=1');
+        
+        $katakunci = $request->katakunci;
+        if (strlen($katakunci)) {
+            $datas = DB::table('pesawat')
+                ->where('maskapai', 'like', "%$katakunci%")
+                ->orWhere('tipe', 'like', "%$katakunci%")
+                ->orWhere('id_pesawat', 'like', "%$katakunci%")
+                ->paginate(5);
+        } else {
+            $datas = DB::select('select * from pesawat where is_deleted = 1');
+        }
+
+        return view('pesawat.restores')
+            ->with('datas', $datas);
+    }
+
     
     public function create() {
         return view('pesawat.add');
@@ -82,7 +100,7 @@ class PesawatController extends Controller
     public function delete($id) {
         // Menggunakan Query Builder Laravel dan Named Bindings untuk valuesnya
         DB::delete('DELETE FROM pesawat WHERE id_pesawat = :id_pesawat', ['id_pesawat' => $id]);
-
+        DB::update('ALTER TABLE pesawat AUTO_INCREMENT=0');
         return redirect()->route('pesawat.index')->with('success', 'Data Pesawat berhasil dihapus');
     }
 

@@ -18,6 +18,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 // pilot route
 Route::get('pilot-all', [PilotController::class, 'index'])->name('pilot.index');
+Route::get('restorepage-plt', [PilotController::class, 'restorepage'])->name('pilot.restorepage');
 Route::get('add-pilot', [PilotController::class, 'create'])->name('pilot.create');
 Route::post('store-pilot', [PilotController::class, 'store'])->name('pilot.store');
 Route::get('edit-pilot/{id}', [PilotController::class, 'edit'])->name('pilot.edit');
@@ -28,6 +29,7 @@ Route::get('restore-pilot', [PilotController::class,  'restore'])->name('pilot.r
 
 // Routing Pesawat
 Route::get('pesawat-all', [PesawatController::class, 'index'])->name('pesawat.index');
+Route::get('restorepage-pswt', [PesawatController::class, 'restorepage'])->name('pesawat.restorepage');
 Route::get('add-pesawat', [PesawatController::class, 'create'])->name('pesawat.create');
 Route::post('store-pesawat', [PesawatController::class, 'store'])->name('pesawat.store');
 Route::get('edit-pesawat/{id}', [PesawatController::class, 'edit'])->name('pesawat.edit');
@@ -38,6 +40,7 @@ Route::get('restore-pesawat', [PesawatController::class,  'restore'])->name('pes
 
 // Routing Hangar
 Route::get('hangar-all', [HangarController::class, 'index'])->name('hangar.index');
+Route::get('restorepage-hngr', [HangarController::class, 'restorepage'])->name('hangar.restorepage');
 Route::get('add-hangar', [HangarController::class, 'create'])->name('hangar.create');
 Route::post('store-hangar', [HangarController::class, 'store'])->name('hangar.store');
 Route::get('edit-hangar/{id}', [HangarController::class, 'edit'])->name('hangar.edit');

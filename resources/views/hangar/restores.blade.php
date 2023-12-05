@@ -2,19 +2,20 @@
 
 @section('content')
 
-    <h4 class="mt-5">Data Pesawat</h4>
+    <h4 class="mt-5">Data Hangar</h4>
 
-    <a href="{{ route('pesawat.create') }}" type="button" class="btn btn-success rounded-3">Tambah Data</a>
-    <a href="{{ route('pesawat.restorepage') }}" type="button" class="btn btn-success rounded-3">Restore Data</a>
+    <a href="{{ route('hangar.create') }}" type="button" class="btn btn-success rounded-3">Tambah Data</a>
+    <a href="{{ route('hangar.index') }}" type="button" class="btn btn-success rounded-3">Daftar Hangar</a>
     <p> </p><br>
 
     <div class="pb-3">
-        <form class="d-flex" action="{{ url('pesawat-all') }}" method="get">
+        <form class="d-flex" action="{{ url('hangar-all') }}" method="get">
             <input class="form-control me-1" type="search" name="katakunci" value="{{ Request::get('katakunci') }}"
-                placeholder="Masukkan Nama Maskapai atau tipe ...." aria-label="Search">
+                placeholder="Masukkan Nama Bandara atau Terminal....." aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
+
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success mt-3" role="alert">
@@ -26,31 +27,31 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Maskapai</th>
-                <th>Tipe</th>
-                <th>ID Hangar</th>
-                <th>Action</th>
+                <th>Nama Hangar</th>
+                <th>Terminal</th>
+
+                <th>Bandara</th>
+
             </tr>
         </thead>
         <tbody>
             @foreach ($datas as $data)
                 <tr>
-                    <td>{{ $data->id_pesawat }}</td>
-                    <td>{{ $data->maskapai }}</td>
-                    <td>{{ $data->tipe }}</td>
                     <td>{{ $data->id_hangar }}</td>
+                    <td>{{ $data->nama_hangar }}</td>
+                    <td>{{ $data->terminal }}</td>
+                    <td>{{ $data->bandara }}</td>
+
                     <td>
-                        <a href="{{ route('pesawat.edit', $data->id_pesawat) }}" type="button"
-                            class="btn btn-warning rounded-3">Ubah</a>
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#hapusModal{{ $data->id_pesawat }}">
+                            data-bs-target="#hapusModal{{ $data->id_hangar }}">
                             Hapus
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="hapusModal{{ $data->id_pesawat }}" tabindex="-1"
+                        <div class="modal fade" id="hapusModal{{ $data->id_hangar }}" tabindex="-1"
                             aria-labelledby="hapusModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -59,7 +60,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form method="POST" action="{{ route('pesawat.delete', $data->id_pesawat) }}">
+                                    <form method="POST" action="{{ route('hangar.delete', $data->id_hangar) }}">
                                         @csrf
                                         <div class="modal-body">
                                             Apakah anda yakin ingin menghapus data ini?
@@ -74,11 +75,11 @@
                             </div>
                         </div>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#softhapusModal{{ $data->id_pesawat }}">
-                            Hapus Sementara
+                            data-bs-target="#softhapusModal{{ $data->id_hangar }}">
+                            Restore
                         </button>
 
-                        <div class="modal fade" id="softhapusModal{{ $data->id_pesawat }}" tabindex="-1"
+                        <div class="modal fade" id="softhapusModal{{ $data->id_hangar }}" tabindex="-1"
                             aria-labelledby="softhapusModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -87,10 +88,10 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form method="POST" action="{{ route('pesawat.softDelete', $data->id_pesawat) }}">
+                                    <form method="GET" action="{{ route('hangar.restore') }}">
                                         @csrf
                                         <div class="modal-body">
-                                            Apakah anda yakin ingin menghapus {{ $data->maskapai }} ini?
+                                            Apakah anda yakin ingin merestore {{ $data->nama_hangar }} ini?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -118,12 +119,14 @@
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="hapusModal" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                <div class="modal fade" id="hapusModal" tabindex="-1" aria-labelledby="hapusModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="hapusModalLabel">Konfirmasi</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 Apakah anda yakin ingin menghapus data ini?

@@ -17,13 +17,29 @@ class HangarController extends Controller
             $datas = DB::table('hangar')
                 ->where('bandara', 'like', "%$katakunci%")
                 ->orWhere('terminal', 'like', "%$katakunci%")
-                ->orWhere('nama_hangar', 'like', "%$katakunci%")
                 ->paginate(5);
         } else {
             $datas = DB::select('select * from hangar where is_deleted = 0');
         }
 
         return view('hangar.index')
+            ->with('datas', $datas);
+    }
+
+    public function restorepage(Request $request) {
+        $datas = DB::select('select * from hangar where is_deleted = 1');
+        
+        $katakunci = $request->katakunci;
+        if (strlen($katakunci)) {
+            $datas = DB::table('hangar')
+                ->where('bandara', 'like', "%$katakunci%")
+                ->orWhere('terminal', 'like', "%$katakunci%")
+                ->paginate(5);
+        } else {
+            $datas = DB::select('select * from hangar where is_deleted = 1');
+        }
+
+        return view('hangar.restores')
             ->with('datas', $datas);
     }
 
@@ -83,7 +99,7 @@ class HangarController extends Controller
     public function delete($id) {
         // Menggunakan Query Builder Laravel dan Named Bindings untuk valuesnya
         DB::delete('DELETE FROM hangar WHERE id_hangar = :id_hangar', ['id_hangar' => $id]);
-
+        DB::update('ALTER TABLE hangar AUTO_INCREMENT=0');
         return redirect()->route('hangar.index')->with('success', 'Data Hanger berhasil dihapus');
     }
 

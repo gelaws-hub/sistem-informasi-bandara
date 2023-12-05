@@ -26,6 +26,23 @@ class PilotController extends Controller
             ->with('datas', $datas);
     }
 
+    public function restorepage(Request $request) {
+        $datas = DB::select('select * from pilot where is_deleted=1');
+        
+        $katakunci = $request->katakunci;
+        if (strlen($katakunci)) {
+            $datas = DB::table('pilot')
+                ->where('nama', 'like', "%$katakunci%")
+                ->orWhere('jam_terbang', 'like', "%$katakunci%")
+                ->paginate(5);
+        } else {
+            $datas = DB::select('select * from pilot where is_deleted = 1');
+        }
+
+        return view('pilot.restores')
+            ->with('datas', $datas);
+    }
+
     public function create() {
         return view('pilot.add');
     }
@@ -79,6 +96,7 @@ class PilotController extends Controller
     public function delete($id) {
         // Menggunakan Query Builder Laravel dan Named Bindings untuk valuesnya
         DB::delete('DELETE FROM pilot WHERE id_pilot = :id_pilot', ['id_pilot' => $id]);
+        DB::update('ALTER TABLE pilot AUTO_INCREMENT=0');
         return redirect()->route('pilot.index')->with('success', 'Data Pilot berhasil dihapus');
     }
 

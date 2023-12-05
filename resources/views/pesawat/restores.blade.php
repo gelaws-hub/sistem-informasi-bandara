@@ -5,7 +5,7 @@
     <h4 class="mt-5">Data Pesawat</h4>
 
     <a href="{{ route('pesawat.create') }}" type="button" class="btn btn-success rounded-3">Tambah Data</a>
-    <a href="{{ route('pesawat.restorepage') }}" type="button" class="btn btn-success rounded-3">Restore Data</a>
+    <a href="{{ route('pesawat.index') }}" type="button" class="btn btn-success rounded-3">Daftar Pesawat</a>
     <p> </p><br>
 
     <div class="pb-3">
@@ -40,8 +40,6 @@
                     <td>{{ $data->tipe }}</td>
                     <td>{{ $data->id_hangar }}</td>
                     <td>
-                        <a href="{{ route('pesawat.edit', $data->id_pesawat) }}" type="button"
-                            class="btn btn-warning rounded-3">Ubah</a>
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -75,7 +73,7 @@
                         </div>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#softhapusModal{{ $data->id_pesawat }}">
-                            Hapus Sementara
+                            Restore
                         </button>
 
                         <div class="modal fade" id="softhapusModal{{ $data->id_pesawat }}" tabindex="-1"
@@ -87,10 +85,10 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form method="POST" action="{{ route('pesawat.softDelete', $data->id_pesawat) }}">
+                                    <form method="GET" action="{{ route('pesawat.restore') }}">
                                         @csrf
                                         <div class="modal-body">
-                                            Apakah anda yakin ingin menghapus {{ $data->maskapai }} ini?
+                                            Apakah anda yakin ingin merestore {{ $data->maskapai }} ini?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
